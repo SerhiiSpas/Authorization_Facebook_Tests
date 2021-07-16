@@ -16,7 +16,7 @@ namespace Authorization_Facebook_Tests
         private readonly By _inputpassword = By.XPath("/html/body/div[1]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/form/div[1]/div[2]/div/input");
         private readonly By _clickentrance = By.XPath("/html/body/div[1]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/form/div[2]/button");
         private readonly By _clickiconbutton = By.XPath("/html/body/div[1]/div/div[1]/div/div[2]/div[4]/div[1]/span/div");
-        //private readonly By _findname = By.XPath("/html/body/div[1]/div/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]/div[1]/div/div/div/div/div/div/div/div/div[1]/div/div[1]/a/div[1]/div[2]/div/div/div/div[1]/span");
+        private readonly By _findname = By.XPath("/html/body/div[1]/div/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]/div[1]/div/div/div/div/div/div/div/div/div[1]/div/div[1]/a/div[1]/div[2]/div/div/div/div[1]/span");
 
 
         /* private readonly By _userlogin = By.XPath("//span[text()='Tomas Edison']");*/
@@ -58,14 +58,14 @@ namespace Authorization_Facebook_Tests
 
             Thread.Sleep(1000);
 
-            //var actualLogin = driver.FindElement(_findname).Text;
+            var actualLogin = driver.FindElement(_findname).Text;
 
-            //Assert.AreEqual(_expectedLogin, actualLogin, "Test fail, login is wrong");
+            Assert.AreEqual(_expectedLogin, actualLogin, "Test fail, login is wrong");
         }
         [TearDown]
         public void TearDown()
         {
-
+            driver.Quit();
         }
     }
 }
