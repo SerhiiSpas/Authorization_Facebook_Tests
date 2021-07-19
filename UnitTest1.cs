@@ -21,51 +21,71 @@ namespace Authorization_Facebook_Tests
 
         /* private readonly By _userlogin = By.XPath("//span[text()='Tomas Edison']");*/
 
-        private const string _mail = "pikacas521@eyeremind.com";
+        //private const string _mail = "pikacas521@eyeremind.com";
         private const string _password = "1234567890Test";
         private const string _expectedLogin = "Tomas Edison";
-            
+        private string[] mailArray = { "pikacas521@eyeremind.com", "pikacas5211@eyeremind.com" };
+        
         [SetUp]
+        
         public void Setup()
         {
+            
+            
+            
+            
+            
 
-            ChromeOptions options = new ChromeOptions();
-            options.AddArguments("--disable-extensions"); // to disable extension
-            options.AddArguments("--disable-notifications"); // to disable notification
-            options.AddArguments("--disable-application-cache"); // to disable cache
-            driver = new ChromeDriver(options);
-            driver.Navigate().GoToUrl("https://www.facebook.com/");
-            driver.Manage().Window.Maximize(); //полноекраний режим
+
         }
 
         [Test]
         public void Test1()
         {
-            var signin1 = driver.FindElement(_inputmail);
-            signin1.SendKeys(_mail);
+            
+            for (int i = 0; i < mailArray.Length; i++)
+            {
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments("--disable-extensions"); // to disable extension
+                options.AddArguments("--disable-notifications"); // to disable notification
+                options.AddArguments("--disable-application-cache"); // to disable cache
+                driver = new ChromeDriver(options);
+                driver.Navigate().GoToUrl("https://www.facebook.com/");
+                driver.Manage().Window.Maximize(); //полноекраний режим
 
-            var signin2 = driver.FindElement(_inputpassword);
-            signin2.SendKeys(_password);
+                Thread.Sleep(10000);
+                var signin1 = driver.FindElement(_inputmail);
+                signin1.SendKeys(mailArray[i]);
+                
 
-            var signin3 = driver.FindElement(_clickentrance);
-            signin3.Click();
+                var signin2 = driver.FindElement(_inputpassword);
+                signin2.SendKeys(_password);
 
-            Thread.Sleep(1000);
+                var signin3 = driver.FindElement(_clickentrance);
+                signin3.Click();
 
-            var signin4 = driver.FindElement(_clickiconbutton);
-            signin4.Click();
+                Thread.Sleep(10000);
+
+                var signin4 = driver.FindElement(_clickiconbutton);
+                signin4.Click();
 
 
-            Thread.Sleep(1000);
+                Thread.Sleep(10000);
 
-            var actualLogin = driver.FindElement(_findname).Text;
+                var actualLogin = driver.FindElement(_findname).Text;
 
-            Assert.AreEqual(_expectedLogin, actualLogin, "Test fail, login is wrong");
+                Assert.AreEqual(_expectedLogin, actualLogin, "Test fail, login is wrong");
+
+                driver.Quit();
+                
+            }
+
         }
+        
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            
         }
     }
 }
