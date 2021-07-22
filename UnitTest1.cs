@@ -12,11 +12,11 @@ namespace Authorization_Facebook_Tests
         
         private IWebDriver driver;
 
-        private readonly By _inputmail = By.XPath("/html/body/div[1]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/form/div[1]/div[1]/input");
-        private readonly By _inputpassword = By.XPath("/html/body/div[1]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/form/div[1]/div[2]/div/input");
-        private readonly By _clickentrance = By.XPath("/html/body/div[1]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/form/div[2]/button");
-        private readonly By _clickiconbutton = By.XPath("/html/body/div[1]/div/div[1]/div/div[2]/div[4]/div[1]/span/div");
-        private readonly By _findname = By.XPath("/html/body/div[1]/div/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]/div[1]/div/div/div/div/div/div/div/div/div[1]/div/div[1]/a/div[1]/div[2]/div/div/div/div[1]/span");
+        private readonly By _inputmail = By.XPath("//input[@type='text']");
+        private readonly By _inputpassword = By.XPath("//input[@type='password']");
+        private readonly By _clickentrance = By.XPath("//button[@name='login']");
+        private readonly By _clickiconbutton = By.XPath("//div[@aria-label='Обліковий запис']");
+        private readonly By _findname = By.XPath("//span[@class='d2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d3f4x2em fe6kdd0r mau55g9w c8b282yb mdeji52x a5q79mjw g1cxx5fr lrazzd5p oo9gr5id hzawbc8m']");
 
 
         /* private readonly By _userlogin = By.XPath("//span[text()='Tomas Edison']");*/
@@ -53,7 +53,7 @@ namespace Authorization_Facebook_Tests
                 driver.Navigate().GoToUrl("https://www.facebook.com/");
                 driver.Manage().Window.Maximize(); //полноекраний режим
 
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 var signin1 = driver.FindElement(_inputmail);
                 signin1.SendKeys(mailArray[i]);
                 
@@ -64,13 +64,13 @@ namespace Authorization_Facebook_Tests
                 var signin3 = driver.FindElement(_clickentrance);
                 signin3.Click();
 
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
 
                 var signin4 = driver.FindElement(_clickiconbutton);
                 signin4.Click();
 
 
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
 
                 var actualLogin = driver.FindElement(_findname).Text;
 
