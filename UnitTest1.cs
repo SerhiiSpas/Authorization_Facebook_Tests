@@ -16,6 +16,8 @@ namespace Authorization_Facebook_Tests
         private const string _password = "1234567890Test";
         private const string _expectedLogin = "Tomas Edison";
         private const string _number = "0669637279";
+        private const string _message = "The email you entered isnвЂ™t connected to an account. Find your account and log in.";
+        private readonly By _find_error = By.XPath("//div[@class='_9ay7']");
         private string[] mailArray = { "pikacas521@eyeremind.com", "hobasa7621@activesniper.com", "hobasa@activesniper.com" };
         [SetUp]
         
@@ -28,12 +30,12 @@ namespace Authorization_Facebook_Tests
             options.AddArguments("--disable-application-cache"); // to disable cache
             driver = new ChromeDriver(options);
             driver.Navigate().GoToUrl("https://www.facebook.com/");
-            driver.Manage().Window.Maximize(); //полноекраний режим
+            driver.Manage().Window.Maximize(); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
         }
 
         [Test]
-        public void Test1()
+        public void Test_1_mail()
         {
             var mainpage = new mainpagePOM(driver);
 
@@ -49,7 +51,7 @@ namespace Authorization_Facebook_Tests
 
         }
         [Test]
-        public void Test2()
+        public void Test_2_mail()
         {
             var mainpage = new mainpagePOM(driver);
 
@@ -66,7 +68,7 @@ namespace Authorization_Facebook_Tests
         }
 
         [Test]
-        public void Test3()
+        public void Test_3_phonenumber()
         {
             var mainpage = new mainpagePOM(driver);
 
@@ -82,19 +84,21 @@ namespace Authorization_Facebook_Tests
 
         }
         [Test]
-        public void Test4_negative()
+        public void Test_4_negative_authorization()
         {
             var mainpage = new mainpagePOM(driver);
 
             mainpage.inputmail3(mailArray);
             mainpage.inputpassword(_password);
             mainpage.clickentrance();
-            mainpage.clickiconbutton();
+            
+
+            mainpage.clickiconbutton_notme();
 
 
-            var actualLogin = driver.FindElement(_findname).Text;
+            var actualstatus = driver.FindElement(_find_error).Text;
 
-            Assert.AreEqual(_expectedLogin, actualLogin, "Test fail, login is wrong");
+            Assert.AreEqual(_message, actualstatus, "Test fail, login is wrong");
             
         }
         [TearDown]

@@ -22,8 +22,9 @@ namespace Authorization_Facebook_Tests.POM
         private readonly By _inputpassword = By.XPath("//input[@type='password']");
         private readonly By _clickentrance = By.XPath("//button[@name='login']");
         private readonly By _clickiconbutton = By.XPath("//div[@aria-label='Обліковий запис']");
-        private readonly By _findname = By.XPath("//span[@class='d2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d3f4x2em fe6kdd0r mau55g9w c8b282yb mdeji52x a5q79mjw g1cxx5fr lrazzd5p oo9gr5id hzawbc8m']");
-
+        
+        private readonly By _clickiconbutton_notme = By.XPath("//a[@class='_39g9']");
+        
 
         public mainpagePOM inputmail(string[] mailArray)
         {
@@ -81,6 +82,14 @@ namespace Authorization_Facebook_Tests.POM
             return this;
 
         }
+        public mainpagePOM clickiconbutton_notme()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(x => driver.FindElement(_clickiconbutton_notme));
+            driver.FindElement(_clickiconbutton_notme).Click();
+            return this;
 
+        }
+       
     }
 }
